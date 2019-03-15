@@ -74,4 +74,29 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  /** red **/
+  --ion-color-red: #EB5757;
+
+  /** Toolbar Styling **/
+  ion-toolbar {
+    --background: var(--ion-color-red);
+    --color: var(--ion-color-light)
+  }
+
+  /** Ion Title **/
+  ion-title {
+    font-size: 24px;
+  }
+
+  /** Ion checkbox **/
+  ion-checkbox {
+    --background-checked: var(--ion-color-success);
+  }
+
+  ion-fab-button {
+    --background: var(--ion-color-red);
+    --background-activated: var(--ion-color-danger-shade);
+  }
+
 }
