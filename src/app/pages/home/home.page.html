@@ -12,6 +12,7 @@
     <h5>All done</h5>
     <p>
       Looks like you have completed all of your todos. Tap + to add a task.
+      
     </p>
   </div>
 
@@ -24,8 +25,8 @@
 
 <ion-content *ngIf="todos.length > 0" padding>
   
-  <ion-slides *ngFor="let todo of todos">
-    <ion-slide>
+
+    <ion-item-sliding *ngFor="let todo of todos">
       <ion-item lines="none">
 
         <ion-checkbox slot="start"
@@ -42,8 +43,12 @@
         </ion-card>
 
       </ion-item>
-    </ion-slide>
-  </ion-slides>
+        <ion-item-options side="end">
+          <ion-item-option (click)="deleteTodo(todo)" color="danger">Delete</ion-item-option>
+        </ion-item-options>
+    </ion-item-sliding>
+
+
 
 
 
