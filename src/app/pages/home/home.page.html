@@ -5,10 +5,13 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-item lines="none" *ngFor='let todo of todos'>
 
-      <ion-checkbox slot="start"
-      [(ngModel)]="todo.checked"></ion-checkbox>
+  <ion-slides *ngFor="let todo of todos">
+    <ion-slide>
+      <ion-item lines="none">
+
+        <ion-checkbox slot="start"
+        [(ngModel)]="todo.checked"></ion-checkbox>
 
         <ion-card>
           <ion-card-header>
@@ -17,12 +20,15 @@
 
           <ion-card-content>
             {{todo.message}}
-          </ion-card-content> 
+          </ion-card-content>   
         </ion-card>
-    </ion-item>
+
+      </ion-item>
+    </ion-slide>
+  </ion-slides>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button>
+    <ion-fab-button (click)="addTodo()">
       <ion-icon name="add-circle-outline"></ion-icon>
     </ion-fab-button>
     </ion-fab>

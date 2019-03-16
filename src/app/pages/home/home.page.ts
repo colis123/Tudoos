@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { AddTodoPage } from '../../modals/add-todo/add-todo.page';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +25,16 @@ export class HomePage implements OnInit {
     }
   ]
 
-  constructor() { }
+  constructor(private router: Router,
+              private modal: ModalController) { }
+
+  async addTodo() {
+    const modal = await this.modal.create({
+      component: AddTodoPage,
+    });
+
+    return await modal.present();
+  }
 
   ngOnInit() {
   }
