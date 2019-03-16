@@ -32,6 +32,7 @@ export class HomePage implements OnInit {
     const modal = await this.modal.create({
       component: AddTodoPage,
     });
+    
 
     return await modal.present();
   }

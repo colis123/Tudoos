@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-todo',
@@ -7,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddTodoPage implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router,
+              private modal: ModalController) { }
+
+  // Cancel and go back to home page.
+  goBack() {
+    this.modal.dismiss();
+  }
 
   ngOnInit() {
   }
