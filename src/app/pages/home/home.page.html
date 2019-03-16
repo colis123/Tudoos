@@ -4,8 +4,26 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content *ngIf="todos.length == 0">
+  <div class="noTodos">
+    <div>
+      <img src="" alt="">
+    </div>
+    <h5>All done</h5>
+    <p>
+      Looks like you have completed all of your todos. Tap + to add a task.
+    </p>
+  </div>
 
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addTodo()">
+      <ion-icon size="large" name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<ion-content *ngIf="todos.length > 0" padding>
+  
   <ion-slides *ngFor="let todo of todos">
     <ion-slide>
       <ion-item lines="none">
@@ -27,9 +45,11 @@
     </ion-slide>
   </ion-slides>
 
+
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="addTodo()">
-      <ion-icon name="add-circle-outline"></ion-icon>
+      <ion-icon size="large" name="add"></ion-icon>
     </ion-fab-button>
-    </ion-fab>
+  </ion-fab>
 </ion-content>

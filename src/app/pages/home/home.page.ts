@@ -10,19 +10,20 @@ import { AddTodoPage } from '../../modals/add-todo/add-todo.page';
 })
 export class HomePage implements OnInit {
 
+
   todos: any = [
-    {
-    title: 'First Todo',
-    message: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    date: "3/14/2019",
-    checked: true,
-    },
-    {
-      title: 'Second Todo',
-    message: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    date: "3/15/2019",
-    checked: false,
-    }
+    // {
+    // title: 'First Todo',
+    // message: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+    // date: "3/14/2019",
+    // checked: true,
+    // },
+    // {
+    //   title: 'Second Todo',
+    // message: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+    // date: "3/15/2019",
+    // checked: false,
+    // }
   ]
 
   constructor(private router: Router,
@@ -32,7 +33,7 @@ export class HomePage implements OnInit {
     const modal = await this.modal.create({
       component: AddTodoPage,
     });
-    
+
 
     return await modal.present();
   }
