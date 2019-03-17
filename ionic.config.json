@@ -1,5 +1,7 @@
 {
   "name": "Tudoos",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

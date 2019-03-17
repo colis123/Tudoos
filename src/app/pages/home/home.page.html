@@ -41,10 +41,12 @@
             {{todo.message}}
           </ion-card-content>   
         </ion-card>
-
+        
       </ion-item>
         <ion-item-options side="end">
-          <ion-item-option (click)="deleteTodo(todo)" color="danger">Delete</ion-item-option>
+          <ion-item-option (click)="deleteTodo(todo)" color="danger">
+            <ion-icon size="large" name="close"></ion-icon>
+          </ion-item-option>
         </ion-item-options>
     </ion-item-sliding>
 

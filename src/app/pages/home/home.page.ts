@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { AddTodoPage } from '../../modals/add-todo/add-todo.page';
+import { ToastController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -27,7 +29,34 @@ export class HomePage implements OnInit {
   ]
 
   constructor(private router: Router,
-              private modal: ModalController) { }
+              private modal: ModalController,
+              private toast: ToastController,
+              private loader: LoadingController ) { }
+
+  
+  
+  async deleteLoad() {
+    const loading = await this.loader.create({
+      spinner: 'bubbles',
+      duration: 1000,
+      message: 'Please wait...',
+      translucent: true,
+      cssClass: 'custom-class custom-loading'
+    });
+    return await loading.present();
+  }            
+
+  // Delete Todo Toast
+  async deleteToast() {
+    const toast = await this.toast.create({
+      message: 'Todo Deleted',
+      position: 'top',
+      duration: 1000
+    });
+
+    toast.present();
+  }
+
 
 
   // Add todo method
@@ -44,7 +73,7 @@ export class HomePage implements OnInit {
     if (index > -1) {
     this.todos.splice(index,1)
     }
-    console.log(this.todos)
+    this.deleteToast();
   }
 
   ngOnInit() {

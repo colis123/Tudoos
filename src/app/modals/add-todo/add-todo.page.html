@@ -9,4 +9,22 @@
 
 <ion-content padding>
 
+  <ion-item>
+    <ion-label position="floating">Date</ion-label>
+    <ion-input [(ngModel)]="date" >
+    <ion-datetime display-format="MMM DD, YYYY"></ion-datetime>
+  </ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Title</ion-label>
+    <ion-input type="text" [(ngModel)]="title"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Message</ion-label>
+    <ion-input type="text" [(ngModel)]="message"></ion-input>
+  </ion-item>
+  <div margin>
+    <ion-button expand="full" (click)="addTodo()">Add Todo</ion-button>
+  </div>
+
 </ion-content>
