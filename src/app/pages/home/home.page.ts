@@ -4,6 +4,8 @@ import { ModalController } from '@ionic/angular';
 import { AddTodoPage } from '../../modals/add-todo/add-todo.page';
 import { ToastController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -12,28 +14,33 @@ import { LoadingController } from '@ionic/angular';
 })
 export class HomePage implements OnInit {
 
+  todoos: Observable<Array<object>>;
+  todos; 
 
-  todos: any = [
-    {
-    title: 'First Todo',
-    message: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    date: "3/14/2019",
-    checked: true,
-    },
-    {
-      title: 'Second Todo',
-    message: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    date: "3/15/2019",
-    checked: false,
-    }
-  ]
+
 
   constructor(private router: Router,
               private modal: ModalController,
               private toast: ToastController,
-              private loader: LoadingController ) { }
+              private loader: LoadingController,
+              private storage: Storage ) { 
 
-  
+                
+    // this.storage.get('todos').then (res => {
+    //   console.log(res);
+    //   this.todoos = res;
+    //   this.todos = res;
+    // });
+  }
+
+  getTodos() {
+    this.storage.get('todos').then (res => {
+      console.log(res);
+      this.todoos = res;
+      this.todos = res;
+    });
+  }
+
   
   async deleteLoad() {
     const loading = await this.loader.create({
@@ -64,6 +71,11 @@ export class HomePage implements OnInit {
     const modal = await this.modal.create({
       component: AddTodoPage,
     });
+
+    modal.onDidDismiss().then(_ => {
+      this.ngOnInit();
+    })
+
     return await modal.present();
   }
 
@@ -73,10 +85,13 @@ export class HomePage implements OnInit {
     if (index > -1) {
     this.todos.splice(index,1)
     }
+
+    this.storage.set('todos', this.todos);
     this.deleteToast();
   }
 
   ngOnInit() {
+    this.getTodos();
   }
 
 }

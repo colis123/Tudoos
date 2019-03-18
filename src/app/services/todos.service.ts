@@ -11,7 +11,7 @@ export class TodosService {
   constructor( private storage: Storage) { }
 
   saveTodo(todo) {
-    this.storage.set('todos', todo)
+    this.storage.set('todos', JSON.stringify(todo))
   }
 
 }

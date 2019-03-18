@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="todos.length == 0">
+<ion-content *ngIf="todoos == null">
   <div class="noTodos">
     <div>
       <img src="" alt="">
@@ -23,10 +23,10 @@
   </ion-fab>
 </ion-content>
 
-<ion-content *ngIf="todos.length > 0" padding>
+<ion-content  padding>
   
 
-    <ion-item-sliding *ngFor="let todo of todos">
+    <ion-item-sliding *ngFor="let todo of todoos">
       <ion-item lines="none">
 
         <ion-checkbox slot="start"
