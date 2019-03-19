@@ -16,6 +16,7 @@ export class HomePage implements OnInit {
 
   todoos: Observable<Array<object>>;
   todos; 
+  todosLength;
 
 
 
@@ -38,6 +39,8 @@ export class HomePage implements OnInit {
       console.log(res);
       this.todoos = res;
       this.todos = res;
+      this.todosLength = res.length;
+      console.log(this.todosLength)
     });
   }
 
@@ -88,6 +91,7 @@ export class HomePage implements OnInit {
 
     this.storage.set('todos', this.todos);
     this.deleteToast();
+    this.ngOnInit();
   }
 
   ngOnInit() {

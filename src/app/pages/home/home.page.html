@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="todoos == null">
+<ion-content *ngIf="todosLength === 0">
   <div class="noTodos">
     <div>
       <img src="" alt="">
@@ -23,7 +23,7 @@
   </ion-fab>
 </ion-content>
 
-<ion-content  padding>
+<ion-content *ngIf='todosLength > 0' padding>
   
 
     <ion-item-sliding *ngFor="let todo of todoos">
