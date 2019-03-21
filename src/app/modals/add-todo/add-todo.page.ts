@@ -4,6 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { TodosService} from '../../services/todos.service';
 import { Storage } from '@ionic/storage';
 import { HomePage } from '../../pages/home/home.page';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-add-todo',
@@ -15,7 +16,8 @@ export class AddTodoPage implements OnInit {
   date: string;
   title: string;
   message: string;
-  todoos: Observable<Array<object>>;
+  todoos:  Array<object>;
+ 
 
 
 
@@ -24,8 +26,17 @@ export class AddTodoPage implements OnInit {
               private modal: ModalController,
               private service: TodosService,
                 private storage: Storage) {
+
+    // Get todos
     this.storage.get('todos').then (res => {
-      this.todoos = res;
+      if(res != null) {
+        this.todoos = res;
+      }
+      else {
+        this.todoos = [{
+          title: 'Add a Todoo'
+        }]
+      }
     })
   }
 
@@ -36,6 +47,7 @@ export class AddTodoPage implements OnInit {
 
   // Add Todo 
   addTodo() {
+    //Create todo 
     let todo = {
       title : this.title,
       message: this.message,
@@ -43,11 +55,15 @@ export class AddTodoPage implements OnInit {
       checked: false
     }
 
+    // Push to todoos array
     this.todoos.unshift(todo);
+    //Set to Storage
     this.storage.set('todos', this.todoos);
 
-    this.modal.dismiss();
-    console.log(this.todoos)
+    this.modal.dismiss().then (_ => {
+      this.router.navigateByUrl('/home');
+    })
+    
   }
 
   ngOnInit() {

@@ -36,15 +36,19 @@ export class HomePage implements OnInit {
 
   getTodos() {
     this.storage.get('todos').then (res => {
-      console.log(res);
-      this.todoos = res;
-      this.todos = res;
-      this.todosLength = res.length;
-      console.log(this.todosLength)
+      if(res != null) {
+        console.log('from storage', res);
+        this.todoos = res;
+        this.todos = res;
+        this.todosLength = res.length;
+        console.log('length of todos from storage', this.todosLength)
+      }
+      else {
+      }
     });
   }
 
-  
+  // Delete Loader
   async deleteLoad() {
     const loading = await this.loader.create({
       spinner: 'bubbles',
@@ -69,7 +73,7 @@ export class HomePage implements OnInit {
 
 
 
-  // Add todo method
+  // Add todo Modal
   async addTodo() {
     const modal = await this.modal.create({
       component: AddTodoPage,
@@ -89,12 +93,23 @@ export class HomePage implements OnInit {
     this.todos.splice(index,1)
     }
 
-    this.storage.set('todos', this.todos);
-    this.deleteToast();
-    this.ngOnInit();
+    this.storage.set('todos', this.todos).then(_ => {
+      this.deleteToast();
+      this.ngOnInit();
+    });
   }
 
+  //Initialize an empty array 
+  setTodos() {
+    this.storage.set('todos', [])
+  }
+
+
   ngOnInit() {
+    if(this.storage.get('todos') == null ) {
+      this.setTodos();
+    }
+    
     this.getTodos();
   }
 
