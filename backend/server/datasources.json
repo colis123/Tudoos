@@ -1,0 +1,16 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "mongo": {
+    "host": "",
+    "port": 0,
+    "url": "mongodb://colis:Pane123!@ds225294.mlab.com:25294/tudoos",
+    "database": "tudoos",
+    "password": "Pane123!",
+    "name": "mongo",
+    "user": "colis",
+    "connector": "mongodb"
+  }
+}
