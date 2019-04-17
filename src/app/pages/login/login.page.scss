@@ -6,7 +6,7 @@
 }
 
 .grid-container {
-  margin: 20% 2em 2em 2em;
+  margin: 10% 2em 2em 2em;
   display: grid;
   grid-row-gap: 30px;
   justify-items: center;
@@ -15,6 +15,7 @@
 
 img {
   justify-self: center;
+  margin-left: 1em;
 }
 
 

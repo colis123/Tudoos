@@ -1,0 +1,24 @@
+.title {
+  color: var(--ion-color-red);
+  font-size: 3rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.grid-container {
+  margin: 15% 2em 2em 2em;
+  display: grid;
+  grid-row-gap: 30px;
+  justify-items: center;
+  align-content: center;
+}
+
+.button {
+  margin-top: 2em;
+  width: 100%;
+}
+
+ion-button {
+  --background: var(--ion-color-red);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+  }
