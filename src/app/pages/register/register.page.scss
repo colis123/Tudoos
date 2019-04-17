@@ -13,12 +13,18 @@
   align-content: center;
 }
 
-.button {
+.inputs {
   margin-top: 2em;
+}
+
+.button {
+  display: grid;
+  grid-gap: 5px;
   width: 100%;
 }
 
 ion-button {
   --background: var(--ion-color-red);
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+  --background-activated: var(--ion-color-danger-shade);
   }
