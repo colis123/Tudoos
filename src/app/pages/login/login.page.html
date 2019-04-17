@@ -1,9 +1,39 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>login</ion-title>
+    <ion-title></ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+  <div class="grid-container">
 
+    <div class="title">Tudoos</div>
+
+    <div class="image">
+      <img src="../../../assets/LogoLogo.svg" alt="Main Logo">
+    </div>
+
+    <div class="inputs">
+      <ion-item>
+        <ion-icon name="person" slot="start"></ion-icon>
+        <ion-input placeholder="username" type="text" [(ngModel)]="userName"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="unlock" slot="start"></ion-icon>
+        <ion-input placeholder="password" type="password" [(ngModel)]="password"></ion-input>
+      </ion-item>
+    </div>
+
+    <div class="buttons">
+        <ion-button expand="full">Login</ion-button>
+        <ion-button expand="full">Register</ion-button>
+    </div>
+  </div>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    
+  </ion-toolbar>
+</ion-footer>
