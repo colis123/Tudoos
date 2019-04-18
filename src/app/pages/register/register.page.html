@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Tudoos</ion-title>
+    <ion-title></ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,21 +11,21 @@
 
     <div class="inputs">
       <ion-item>
-        <ion-input placeholder="First Name"></ion-input>
+        <ion-input [(ngModel)]="newUser.firstName" placeholder="First Name"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input placeholder="Last Name"></ion-input>
+        <ion-input [(ngModel)]="newUser.lastName" placeholder="Last Name"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input placeholder="Email"></ion-input>
+        <ion-input [(ngModel)]="newUser.email" placeholder="Email"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input placeholder="Password"></ion-input>
+        <ion-input type="password" [(ngModel)]="newUser.password" placeholder="Password"></ion-input>
       </ion-item>
     </div>
 
     <div class="button">
-      <ion-button expand="full">Sign Up!</ion-button>
+      <ion-button expand="full" (click)="register()">Sign Up!</ion-button>
       <ion-button expand="full" (click)="toLogin()">Login</ion-button>
     </div>
   </div>

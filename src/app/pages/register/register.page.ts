@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
+
 
 @Component({
   selector: 'app-register',
@@ -8,7 +10,19 @@ import { Router } from '@angular/router';
 })
 export class RegisterPage implements OnInit {
 
-  constructor( private router: Router) { }
+  newUser: any = {};
+
+  constructor( private router: Router,
+               private service: UserService) { }
+
+  register() {
+    this.service.registerUser(this.newUser)
+      .subscribe((user:any) => {
+        sessionStorage.setItem('token', user.token)
+        sessionStorage.setItem('userId', user.userId)
+    });
+  }
+
 
   toLogin() {
     this.router.navigateByUrl('/login');
