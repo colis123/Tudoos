@@ -17,6 +17,7 @@ export class HomePage implements OnInit {
   todoos: Observable<Array<object>>;
   todos; 
   todosLength;
+  userInfo: any;
 
 
 
@@ -106,6 +107,9 @@ export class HomePage implements OnInit {
 
 
   ngOnInit() {
+    
+
+
     if(this.storage.get('todos') == null ) {
       this.setTodos();
     }

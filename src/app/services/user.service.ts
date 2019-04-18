@@ -16,6 +16,6 @@ export class UserService {
   }
 
   loginUser(user: any) {
-    return this.http.post(`${this.userUrl}/login`, user);
+    return this.http.post(`${this.userUrl}/login?include=user`, user);
   }
 }

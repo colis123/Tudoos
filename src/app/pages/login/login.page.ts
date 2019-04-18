@@ -20,6 +20,8 @@ export class LoginPage implements OnInit {
       .subscribe((user: any) => {
         sessionStorage.setItem('token', user.token)
         sessionStorage.setItem('userId', user.userId)
+        console.log(user);
+        this.userData = user;
       })
 
       this.router.navigateByUrl('/home');
