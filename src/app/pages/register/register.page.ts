@@ -21,6 +21,8 @@ export class RegisterPage implements OnInit {
         sessionStorage.setItem('token', user.token)
         sessionStorage.setItem('userId', user.userId)
     });
+
+    this.router.navigateByUrl('/home');
   }
 
 
