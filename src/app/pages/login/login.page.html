@@ -29,6 +29,11 @@
         <ion-button expand="full" (click)="toLogin()">Login</ion-button>
         <ion-button expand="full" (click)="toRegister()">Register</ion-button>
     </div>
+
+    <div *ngIf="loginValidation">
+      <h3>Incorrect email/ password</h3>
+    </div>
+    
   </div>
 </ion-content>
 
