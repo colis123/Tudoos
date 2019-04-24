@@ -34,7 +34,9 @@ export class HomePage implements OnInit {
   todosList() {
     this.todoService.getUserTodos()
       .subscribe((res:any) => {
-        console.log(res.length);
+        console.log(res);
+        this.todosLength = res.length;
+        this.todos = res;
 
       })
   }
