@@ -9,19 +9,32 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TodosService {
 
-  todoUrl: string = 'http://localhost:3000/api/todos';
+  userUrl: string = 'http://localhost:3000/api/appUsers';
+
 
   constructor( private storage: Storage,
                private http: HttpClient) { 
-                 this.getTodo();
                }
-
-  getTodo() {
-    return this.http.get(`${this.todoUrl}`);
+  
+  // API Call Using
+  getUserTodos() {
+    let token = window.sessionStorage.getItem('token');
+    let userId = window.sessionStorage.getItem('userId');
+    return this.http.get(`${this.userUrl}/${userId}/todos?access_token=${token}`)
   }
 
   saveTodo(todo) {
     this.storage.set('todos', JSON.stringify(todo))
   }
+
+    //Get Todos
+  //http://localhost:3000/api/appUsers/5cbfbd4400d968760a7b4da9/todos?access_token=B8uHxVvRJ5OoRurEOBCyFtZYac7UxXlpmthqG1FKNVQWBrAV4gpQRBLKDvjbzxyz
+
+
+  // Post with user id.
+
+  //http://localhost:3000/api/appUsers/5cbfbd4400d968760a7b4da9/todos?access_token=FZa709Nmf3c7p35I5P4otWzekAxyULnt7bkzt1tZEiyRGeG5ApTj2iJGWlgSVUWy
+
+
 
 }

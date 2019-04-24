@@ -6,6 +6,7 @@ import { ToastController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Observable } from 'rxjs';
+import { TodosService } from '../../services/todos.service';
 
 @Component({
   selector: 'app-home',
@@ -25,14 +26,17 @@ export class HomePage implements OnInit {
               private modal: ModalController,
               private toast: ToastController,
               private loader: LoadingController,
-              private storage: Storage ) { 
+              private storage: Storage,
+              private todoService: TodosService ) { 
 
-                
-    // this.storage.get('todos').then (res => {
-    //   console.log(res);
-    //   this.todoos = res;
-    //   this.todos = res;
-    // });
+  }
+
+  todosList() {
+    this.todoService.getUserTodos()
+      .subscribe((res:any) => {
+        console.log(res.length);
+
+      })
   }
 
   getTodos() {
@@ -107,6 +111,9 @@ export class HomePage implements OnInit {
 
 
   ngOnInit() {
+    //Get Todos from API
+    this.todosList();
+  
     
 
 
