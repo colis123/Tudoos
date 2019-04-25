@@ -36,12 +36,31 @@ export class HomePage implements OnInit {
       })
   }
 
+  // These are Delete methods, including Loaders/ Toasts.////
+
+  // Delete todo method
+  deleteTodo(todoId) {
+
+    this.deleteLoad().then(_ => {
+
+      this.todoService.deleteUserTodo(todoId)
+        .subscribe((res: any) => {
+          console.log('deleted')
+        });
+    })
+    .then(_ => {
+      setTimeout(() => {
+        this.todosList();
+        this.deleteToast();
+      }, 500);
+    })
+  }
 
   // Delete Loader
   async deleteLoad() {
     const loading = await this.loader.create({
       spinner: 'bubbles',
-      duration: 1000,
+      duration: 500,
       message: 'Please wait...',
       translucent: true,
       cssClass: 'custom-class custom-loading'
@@ -54,7 +73,7 @@ export class HomePage implements OnInit {
     const toast = await this.toast.create({
       message: 'Todo Deleted',
       position: 'top',
-      duration: 1000
+      duration: 1300
     });
 
     toast.present();
@@ -86,14 +105,6 @@ export class HomePage implements OnInit {
     });
 
     return await modal.present();
-  }
-
-  // Delete todo method
-  deleteTodo(todoId) {
-    this.todoService.deleteUserTodo(todoId)
-      .subscribe((res: any) => {
-        console.log('deleted')
-      });
   }
 
 
