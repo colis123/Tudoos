@@ -26,6 +26,7 @@ export class HomePage implements OnInit {
 
   }
 
+  // Get user todos.
   todosList() {
     this.todoService.getUserTodos()
       .subscribe((res:any) => {
@@ -78,6 +79,9 @@ export class HomePage implements OnInit {
 
     toast.present();
   }
+  ////////////////////
+
+  // Add Todo methods including loader/modals //
 
   //Loader For Todo Addition
   async addTodoLoader() {
@@ -106,17 +110,13 @@ export class HomePage implements OnInit {
 
     return await modal.present();
   }
+  //////////////////////
 
 
   ngOnInit() {
   }
 
   ionViewWillEnter() {
-    this.todosList();
-    console.log('Load will Enter');
-  }
-
-  ionViewWillLeave() {
     this.todosList();
   }
 
