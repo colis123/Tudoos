@@ -4,8 +4,6 @@ import { ModalController } from '@ionic/angular';
 import { AddTodoPage } from '../../modals/add-todo/add-todo.page';
 import { ToastController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
-import { Storage } from '@ionic/storage';
-import { Observable } from 'rxjs';
 import { TodosService } from '../../services/todos.service';
 
 @Component({
@@ -15,10 +13,8 @@ import { TodosService } from '../../services/todos.service';
 })
 export class HomePage implements OnInit {
 
-  todoos: Observable<Array<object>>;
   todos; 
   todosLength;
-  userInfo: any;
 
 
 
@@ -26,7 +22,6 @@ export class HomePage implements OnInit {
               private modal: ModalController,
               private toast: ToastController,
               private loader: LoadingController,
-              private storage: Storage,
               private todoService: TodosService ) { 
 
   }
@@ -41,19 +36,6 @@ export class HomePage implements OnInit {
       })
   }
 
-  getTodos() {
-    this.storage.get('todos').then (res => {
-      if(res != null) {
-        console.log('from storage', res);
-        this.todoos = res;
-        this.todos = res;
-        this.todosLength = res.length;
-        console.log('length of todos from storage', this.todosLength)
-      }
-      else {
-      }
-    });
-  }
 
   // Delete Loader
   async deleteLoad() {
@@ -78,7 +60,17 @@ export class HomePage implements OnInit {
     toast.present();
   }
 
-
+  //Loader For Todo Addition
+  async addTodoLoader() {
+    const loading = await this.loader.create({
+      spinner: 'bubbles',
+      duration: 500,
+      message: 'Please wait...',
+      translucent: true,
+      cssClass: 'custom-class custom-loading'
+    });
+    return await loading.present();
+  }       
 
   // Add todo Modal
   async addTodo() {
@@ -87,43 +79,35 @@ export class HomePage implements OnInit {
     });
 
     modal.onDidDismiss().then(_ => {
-      this.ngOnInit();
-    })
+      this.addTodoLoader().then
+      setTimeout(() => {
+        this.todosList();
+      }, 550);
+    });
 
     return await modal.present();
   }
 
   // Delete todo method
-  deleteTodo(todo: any) {
-    let index = this.todos.indexOf(todo)
-    if (index > -1) {
-    this.todos.splice(index,1)
-    }
-
-    this.storage.set('todos', this.todos).then(_ => {
-      this.deleteToast();
-      this.ngOnInit();
-    });
-  }
-
-  //Initialize an empty array 
-  setTodos() {
-    this.storage.set('todos', [])
+  deleteTodo(todoId) {
+    this.todoService.deleteUserTodo(todoId)
+      .subscribe((res: any) => {
+        console.log('deleted')
+      });
   }
 
 
   ngOnInit() {
-    //Get Todos from API
-    this.todosList();
-  
-    
-
-
-    if(this.storage.get('todos') == null ) {
-      this.setTodos();
-    }
-    
-    this.getTodos();
   }
+
+  ionViewWillEnter() {
+    this.todosList();
+    console.log('Load will Enter');
+  }
+
+  ionViewWillLeave() {
+    this.todosList();
+  }
+
 
 }
