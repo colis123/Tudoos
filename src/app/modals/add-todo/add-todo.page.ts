@@ -15,10 +15,7 @@ export class AddTodoPage implements OnInit {
   date: string;
   title: string;
   message: string;
- 
-
-
-
+  inputsMissing: boolean = false;
 
   constructor(private router: Router,
               private modal: ModalController,
@@ -32,19 +29,23 @@ export class AddTodoPage implements OnInit {
 
   // Add Todo 
   addTodo() {
-    //Create todo 
-    let todo = {
-      title : this.title,
-      message: this.message,
-      date: this.date,
-      checked: false
-    }
+    if(this.date == null || this.message == null || this.title == null ) {
+      console.log('empty');
+    } else {
+      //Create todo 
+      let todo = {
+        title : this.title,
+        message: this.message,
+        date: this.date,
+        checked: false
+      }
 
-    this.modal.dismiss().then (_ => {
-      this.todoService.postUserTodo(todo)
-        .subscribe((res: any) => {});
-      this.router.navigateByUrl('/home');
-    })
+      this.modal.dismiss().then (_ => {
+        this.todoService.postUserTodo(todo)
+          .subscribe((res: any) => {});
+        this.router.navigateByUrl('/home');
+      })
+     }
     
   }
 
