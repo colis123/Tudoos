@@ -110,6 +110,18 @@ export class HomePage implements OnInit {
 
     return await modal.present();
   }
+
+  updateTodo(todo) {
+
+    setTimeout(_ => {
+      this.todoService.updateUserTodo(todo)
+      .subscribe((res: any) => {
+      })
+    },500)
+    setTimeout(_ => {
+      this.todosList()
+    }, 600)
+  }
   //////////////////////
 
 

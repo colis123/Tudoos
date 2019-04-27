@@ -30,7 +30,7 @@
       <ion-item lines="none">
 
         <ion-checkbox slot="start"
-        [(ngModel)]="todo.checked"></ion-checkbox>
+        [(ngModel)]="todo.checked" (click)="updateTodo(todo)"></ion-checkbox>
 
         <ion-card>
           <ion-card-header>
