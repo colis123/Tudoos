@@ -5,6 +5,9 @@ import { AddTodoPage } from '../../modals/add-todo/add-todo.page';
 import { ToastController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { TodosService } from '../../services/todos.service';
+import { UserService } from '../../services/user.service';
+import { ActionSheetController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-home',
@@ -22,7 +25,9 @@ export class HomePage implements OnInit {
               private modal: ModalController,
               private toast: ToastController,
               private loader: LoadingController,
-              private todoService: TodosService ) { 
+              private todoService: TodosService,
+              private userService: UserService,
+              private actionSheet: ActionSheetController ) { 
 
   }
 
@@ -123,6 +128,33 @@ export class HomePage implements OnInit {
     }, 600)
   }
   //////////////////////
+
+  // Log out User //
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheet.create({
+      animated: true,
+      header: 'Want to log out?',
+      buttons: [{
+        text: 'Log Out',
+        role: 'destructive',
+        handler: () => {
+          this.logOut();
+        }
+      }, 
+      {
+        text: 'Cancel',
+        role: 'cancel',
+      }]
+    });
+    await actionSheet.present();
+  }
+  
+
+  logOut() {
+    this.userService.logOutUser();
+    this.router.navigateByUrl('/login');
+  }
 
 
   ngOnInit() {
