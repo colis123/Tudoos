@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { TodosService} from '../../services/todos.service';
-import { Storage } from '@ionic/storage';
-import { HomePage } from '../../pages/home/home.page';
-import { Observable } from 'rxjs/internal/Observable';
+
+
 
 @Component({
   selector: 'app-add-todo',
@@ -16,28 +15,11 @@ export class AddTodoPage implements OnInit {
   date: string;
   title: string;
   message: string;
-  todoos:  Array<object>;
- 
-
-
-
+  inputsMissing: boolean = false;
 
   constructor(private router: Router,
               private modal: ModalController,
-              private service: TodosService,
-                private storage: Storage) {
-
-    // Get todos
-    this.storage.get('todos').then (res => {
-      if(res != null) {
-        this.todoos = res;
-      }
-      else {
-        this.todoos = [{
-          title: 'Add a Todoo'
-        }]
-      }
-    })
+              private todoService: TodosService) {
   }
 
   // Cancel and go back to home page.
@@ -47,22 +29,23 @@ export class AddTodoPage implements OnInit {
 
   // Add Todo 
   addTodo() {
-    //Create todo 
-    let todo = {
-      title : this.title,
-      message: this.message,
-      date: this.date,
-      checked: false
-    }
+    if(this.date == null || this.message == null || this.title == null ) {
+      console.log('empty');
+    } else {
+      //Create todo 
+      let todo = {
+        title : this.title,
+        message: this.message,
+        date: this.date,
+        checked: false
+      }
 
-    // Push to todoos array
-    this.todoos.unshift(todo);
-    //Set to Storage
-    this.storage.set('todos', this.todoos);
-
-    this.modal.dismiss().then (_ => {
-      this.router.navigateByUrl('/home');
-    })
+      this.modal.dismiss().then (_ => {
+        this.todoService.postUserTodo(todo)
+          .subscribe((res: any) => {});
+        this.router.navigateByUrl('/home');
+      })
+     }
     
   }
 

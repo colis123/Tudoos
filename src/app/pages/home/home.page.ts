@@ -4,8 +4,10 @@ import { ModalController } from '@ionic/angular';
 import { AddTodoPage } from '../../modals/add-todo/add-todo.page';
 import { ToastController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
-import { Storage } from '@ionic/storage';
-import { Observable } from 'rxjs';
+import { TodosService } from '../../services/todos.service';
+import { UserService } from '../../services/user.service';
+import { ActionSheetController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-home',
@@ -14,10 +16,8 @@ import { Observable } from 'rxjs';
 })
 export class HomePage implements OnInit {
 
-  todoos: Observable<Array<object>>;
   todos; 
   todosLength;
-  userInfo: any;
 
 
 
@@ -25,35 +25,48 @@ export class HomePage implements OnInit {
               private modal: ModalController,
               private toast: ToastController,
               private loader: LoadingController,
-              private storage: Storage ) { 
+              private todoService: TodosService,
+              private userService: UserService,
+              private actionSheet: ActionSheetController ) { 
 
-                
-    // this.storage.get('todos').then (res => {
-    //   console.log(res);
-    //   this.todoos = res;
-    //   this.todos = res;
-    // });
   }
 
-  getTodos() {
-    this.storage.get('todos').then (res => {
-      if(res != null) {
-        console.log('from storage', res);
-        this.todoos = res;
-        this.todos = res;
+  // Get user todos.
+  todosList() {
+    this.todoService.getUserTodos()
+      .subscribe((res:any) => {
+        console.log(res);
         this.todosLength = res.length;
-        console.log('length of todos from storage', this.todosLength)
-      }
-      else {
-      }
-    });
+        this.todos = res;
+
+      })
+  }
+
+  // These are Delete methods, including Loaders/ Toasts.////
+
+  // Delete todo method
+  deleteTodo(todoId) {
+
+    this.deleteLoad().then(_ => {
+
+      this.todoService.deleteUserTodo(todoId)
+        .subscribe((res: any) => {
+          console.log('deleted')
+        });
+    })
+    .then(_ => {
+      setTimeout(() => {
+        this.todosList();
+        this.deleteToast();
+      }, 500);
+    })
   }
 
   // Delete Loader
   async deleteLoad() {
     const loading = await this.loader.create({
       spinner: 'bubbles',
-      duration: 1000,
+      duration: 500,
       message: 'Please wait...',
       translucent: true,
       cssClass: 'custom-class custom-loading'
@@ -66,13 +79,26 @@ export class HomePage implements OnInit {
     const toast = await this.toast.create({
       message: 'Todo Deleted',
       position: 'top',
-      duration: 1000
+      duration: 1300
     });
 
     toast.present();
   }
+  ////////////////////
 
+  // Add Todo methods including loader/modals //
 
+  //Loader For Todo Addition
+  async addTodoLoader() {
+    const loading = await this.loader.create({
+      spinner: 'bubbles',
+      duration: 500,
+      message: 'Please wait...',
+      translucent: true,
+      cssClass: 'custom-class custom-loading'
+    });
+    return await loading.present();
+  }       
 
   // Add todo Modal
   async addTodo() {
@@ -81,40 +107,62 @@ export class HomePage implements OnInit {
     });
 
     modal.onDidDismiss().then(_ => {
-      this.ngOnInit();
-    })
+      this.addTodoLoader().then
+      setTimeout(() => {
+        this.todosList();
+      }, 550);
+    });
 
     return await modal.present();
   }
 
-  // Delete todo method
-  deleteTodo(todo: any) {
-    let index = this.todos.indexOf(todo)
-    if (index > -1) {
-    this.todos.splice(index,1)
-    }
+  updateTodo(todo) {
 
-    this.storage.set('todos', this.todos).then(_ => {
-      this.deleteToast();
-      this.ngOnInit();
-    });
+    setTimeout(_ => {
+      this.todoService.updateUserTodo(todo)
+      .subscribe((res: any) => {
+      })
+    },500)
+    setTimeout(_ => {
+      this.todosList()
+    }, 600)
   }
+  //////////////////////
 
-  //Initialize an empty array 
-  setTodos() {
-    this.storage.set('todos', [])
+  // Log out User //
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheet.create({
+      animated: true,
+      header: 'Want to log out?',
+      buttons: [{
+        text: 'Log Out',
+        role: 'destructive',
+        handler: () => {
+          this.logOut();
+        }
+      }, 
+      {
+        text: 'Cancel',
+        role: 'cancel',
+      }]
+    });
+    await actionSheet.present();
+  }
+  
+
+  logOut() {
+    this.userService.logOutUser();
+    this.router.navigateByUrl('/login');
   }
 
 
   ngOnInit() {
-    
-
-
-    if(this.storage.get('todos') == null ) {
-      this.setTodos();
-    }
-    
-    this.getTodos();
   }
+
+  ionViewWillEnter() {
+    this.todosList();
+  }
+
 
 }

@@ -6,6 +6,7 @@ module.exports = function(Appuser) {
     if (user) {
         user.token = user.id;
     }
+    next()
 })
 
 Appuser.observe('after save', function(ctx, next) {

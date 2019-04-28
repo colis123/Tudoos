@@ -21,8 +21,7 @@
     <ion-label position="floating">Message</ion-label>
     <ion-input type="text" [(ngModel)]="message"></ion-input>
   </ion-item>
-  <div margin>
-    <ion-button expand="full" (click)="addTodo()">Add Todo</ion-button>
+  <div margin >
+    <ion-button *ngIf="title && message && date" expand="full" (click)="addTodo()">Add Todo</ion-button>
   </div>
-
 </ion-content>
