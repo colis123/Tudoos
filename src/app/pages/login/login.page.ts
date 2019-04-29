@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 
+import { ToastController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-login',
@@ -14,9 +16,19 @@ export class LoginPage implements OnInit {
   loginValidation: boolean = false;
 
   constructor( private router: Router,
-               private service: UserService,) { 
+               private service: UserService,
+               private toast: ToastController) { 
                }
 
+  async loginAlert() {
+  const toast = await this.toast.create({
+    message: 'Incorrect Email/ Password',
+    duration: 2000,
+    position: 'middle',
+    cssClass: 'toast'
+  });
+  toast.present();
+  }
 
   
   toLogin() {
@@ -30,6 +42,9 @@ export class LoginPage implements OnInit {
         this.router.navigateByUrl('/home');
         },
         (err:any) => {
+          if(err.status === 401){
+            this.loginAlert()
+          }
           
         });
   }

@@ -103,9 +103,11 @@
     --background: var(--ion-color-red);
     --background-activated: var(--ion-color-danger-shade);
   }
-  /** Toast Width  **/
+  /** Toast Login Alert  **/
   ion-toast {
-    --width: 120px;
+    --background: transparent;
+    --color: var(--ion-color-red);
+    text-align: center;
   }
 
 
