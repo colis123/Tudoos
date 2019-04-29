@@ -25,11 +25,12 @@ export class LoginPage implements OnInit {
         sessionStorage.setItem('token', user.token)
         sessionStorage.setItem('userId', user.userId)
         console.log(user);
-
+        // Clear input field
+        this.user = {};
         this.router.navigateByUrl('/home');
         },
         (err:any) => {
-          console.log(err);
+          
         });
   }
 
