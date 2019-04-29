@@ -103,8 +103,9 @@
     --background: var(--ion-color-red);
     --background-activated: var(--ion-color-danger-shade);
   }
+
   /** Toast Login Alert  **/
-  ion-toast {
+  .toast {
     --background: transparent;
     --color: var(--ion-color-red);
     text-align: center;
