@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
-
 import { ToastController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -17,7 +17,8 @@ export class LoginPage implements OnInit {
 
   constructor( private router: Router,
                private service: UserService,
-               private toast: ToastController) { 
+               private toast: ToastController,
+               private storage: Storage) { 
                }
 
   async loginAlert() {
@@ -36,7 +37,9 @@ export class LoginPage implements OnInit {
       .subscribe((user: any) => {
         sessionStorage.setItem('token', user.token)
         sessionStorage.setItem('userId', user.userId)
-        console.log(user);
+        console.log(user.user.firstName);
+        //Store user object 
+        sessionStorage.setItem('firstName', user.user.firstName);
         // Clear input field
         this.user = {};
         this.router.navigateByUrl('/home');
