@@ -79,7 +79,8 @@ export class HomePage implements OnInit {
     const toast = await this.toast.create({
       message: 'Todo Deleted',
       position: 'top',
-      duration: 1300
+      duration: 1300,
+      cssClass: 'deleteTodo'
     });
 
     toast.present();
