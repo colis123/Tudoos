@@ -103,9 +103,17 @@
     --background: var(--ion-color-red);
     --background-activated: var(--ion-color-danger-shade);
   }
-  /** Toast Width  **/
-  ion-toast {
-    --width: 120px;
+
+  /** Toast Login Alert  **/
+  .toast {
+    --background: transparent;
+    --color: var(--ion-color-red);
+    text-align: center;
+  }
+
+/** Delete Todo Toast **/
+  .deleteTodo {
+    text-align: center;
   }
 
 

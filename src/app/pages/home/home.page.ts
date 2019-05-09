@@ -35,7 +35,6 @@ export class HomePage implements OnInit {
   todosList() {
     this.todoService.getUserTodos()
       .subscribe((res:any) => {
-        console.log(res);
         this.todosLength = res.length;
         this.todos = res;
 
@@ -51,7 +50,7 @@ export class HomePage implements OnInit {
 
       this.todoService.deleteUserTodo(todoId)
         .subscribe((res: any) => {
-          console.log('deleted')
+          
         });
     })
     .then(_ => {
@@ -79,7 +78,8 @@ export class HomePage implements OnInit {
     const toast = await this.toast.create({
       message: 'Todo Deleted',
       position: 'top',
-      duration: 1300
+      duration: 1300,
+      cssClass: 'deleteTodo'
     });
 
     toast.present();
@@ -122,10 +122,11 @@ export class HomePage implements OnInit {
       this.todoService.updateUserTodo(todo)
       .subscribe((res: any) => {
       })
-    },500)
+    },100)
     setTimeout(_ => {
-      this.todosList()
-    }, 600)
+      this.todosList();
+      this.ionViewWillEnter();
+    }, 200)
   }
   //////////////////////
 

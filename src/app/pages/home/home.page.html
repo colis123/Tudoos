@@ -21,6 +21,11 @@
       <ion-icon size="large" name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button (click)="presentActionSheet()">
+      <ion-icon name="log-out"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
 
 <ion-content *ngIf='todosLength > 0' padding>
