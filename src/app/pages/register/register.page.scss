@@ -28,3 +28,7 @@ ion-button {
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
   --background-activated: var(--ion-color-danger-shade);
   }
+
+  .loginButton {
+    opacity: .5;
+  }

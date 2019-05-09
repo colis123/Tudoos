@@ -25,7 +25,11 @@
     </div>
 
     <div class="button">
-      <ion-button expand="full" (click)="register()">Sign Up!</ion-button>
+      <ion-button *ngIf="newUser.firstName && newUser.lastName && newUser.email && newUser.password; else disableButton " expand="full" (click)="register()">Sign Up!</ion-button>
+
+      <ng-template #disableButton>
+        <ion-button expand="full" class="loginButton">Sign Up!</ion-button>
+      </ng-template>
       <ion-button expand="full" (click)="toLogin()">Login</ion-button>
     </div>
   </div>
