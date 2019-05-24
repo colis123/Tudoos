@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TodosService {
 
-  userUrl: string = 'http://localhost:3000/api/appUsers';
+  userUrl: string = 'https://fast-plateau-19135.herokuapp.com/api/appUsers/';
 
   // userInfo: object = {
   //   userToken : window.sessionStorage.getItem('token'),
