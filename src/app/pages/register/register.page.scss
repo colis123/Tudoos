@@ -32,3 +32,13 @@ ion-button {
   .loginButton {
     opacity: .5;
   }
+
+  @media screen and (min-width: 380px) {
+    .button {
+      width: 20rem;
+    }
+
+    .grid-container {
+      margin: 5rem;
+    }
+  }
