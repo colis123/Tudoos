@@ -124,8 +124,7 @@ export class HomePage implements OnInit {
       })
     },100)
     setTimeout(_ => {
-      this.todosList();
-      this.ionViewWillEnter();
+      this.ionViewWillLeave();
     }, 200)
   }
   //////////////////////
@@ -162,6 +161,10 @@ export class HomePage implements OnInit {
   }
 
   ionViewWillEnter() {
+    this.todosList();
+  }
+
+  ionViewWillLeave	() {
     this.todosList();
   }
 
