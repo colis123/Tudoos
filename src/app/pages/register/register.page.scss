@@ -32,3 +32,15 @@ ion-button {
   .loginButton {
     opacity: .5;
   }
+
+  @media screen and (min-width: 400px) {
+
+    .button[_ngcontent-c0] {
+      width: 20rem;
+    }
+  
+    .grid-container[_ngcontent-c0]{
+      margin-top: 2rem;
+    }
+  }
+  
