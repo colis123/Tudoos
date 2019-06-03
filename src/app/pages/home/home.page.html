@@ -29,6 +29,7 @@
 </ion-content>
 
 <ion-content *ngIf='todosLength > 0' padding>
+  <div class="grid">
   
 
     <ion-item-sliding *ngFor="let todo of todos">
@@ -54,6 +55,7 @@
           </ion-item-option>
         </ion-item-options>
     </ion-item-sliding>
+    </div>
 
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
