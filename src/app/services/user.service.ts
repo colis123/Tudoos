@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UserService {
 
-  userUrl: string = 'http://localhost:3000/api/appUsers'
+  userUrl: string = 'https://fast-plateau-19135.herokuapp.com/api/appUsers'
 
   constructor( private http: HttpClient) { }
 
