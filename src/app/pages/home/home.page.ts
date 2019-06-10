@@ -117,7 +117,7 @@ export class HomePage implements OnInit {
   }
 
   updateTodo(todo) {
-
+    
     setTimeout(_ => {
       this.todoService.updateUserTodo(todo)
       .subscribe((res: any) => {
