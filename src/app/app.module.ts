@@ -14,11 +14,12 @@ import { IonicStorageModule } from '@ionic/storage';
 import { TodosService } from './services/todos.service';
 
 import { AddTodoPage } from './modals/add-todo/add-todo.page';
+import { EditTodoPage } from './modals/edit-todo/edit-todo.page'
 
 
 @NgModule({
-  declarations: [AppComponent, AddTodoPage],
-  entryComponents: [AddTodoPage],
+  declarations: [AppComponent, AddTodoPage, EditTodoPage],
+  entryComponents: [AddTodoPage, EditTodoPage],
   imports: [
   HttpClientModule, FormsModule, BrowserModule, IonicStorageModule.forRoot(), IonicModule.forRoot(), AppRoutingModule],
   providers: [

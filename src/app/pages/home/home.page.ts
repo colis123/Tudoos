@@ -7,6 +7,7 @@ import { LoadingController } from '@ionic/angular';
 import { TodosService } from '../../services/todos.service';
 import { UserService } from '../../services/user.service';
 import { ActionSheetController } from '@ionic/angular';
+import { EditTodoPage } from 'src/app/modals/edit-todo/edit-todo.page';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class HomePage implements OnInit {
 
   todos; 
   todosLength;
+  detailBoolean: boolean = false;
 
 
 
@@ -117,6 +119,21 @@ export class HomePage implements OnInit {
   }
 
   // Edit Todos
+  async editTodoModal(todo) {
+    const modal = await this.modal.create({
+      component: EditTodoPage,
+      componentProps: {todo}
+    });
+
+    modal.onDidDismiss().then(_ => {
+      this.addTodoLoader().then
+        setTimeout(() => {
+        this.todosList();
+        }, 550)
+    })
+    return await modal.present();
+  }
+
 
   updateTodo(todo) {
 

@@ -49,11 +49,16 @@
         <ion-item-options side="end">
           <ion-item-option color="primary-contrast"><ion-checkbox [(ngModel)]="todo.checked" (click)="updateTodo(todo)"></ion-checkbox></ion-item-option>
 
-          <ion-item-option color="primary" (click)="editTodo(item)"><ion-icon name="clipboard"></ion-icon></ion-item-option>
+          <ion-item-option color="primary" (click)="editTodoModal(todo)"><ion-icon name="clipboard"></ion-icon></ion-item-option>
 
           <ion-item-option color="danger" (click)="deleteTodo(todo.id)"><ion-icon name="trash"></ion-icon></ion-item-option>
         </ion-item-options>
       </ion-item-sliding>
+      <ion-card>
+        <ion-card-content>
+            {{todo.message}}
+        </ion-card-content>
+      </ion-card>
   </ion-list>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">

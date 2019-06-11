@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class TodosService {
 
   userUrl: string = 'https://fast-plateau-19135.herokuapp.com/api/appUsers';
+  todosUrl: string = 'https://fast-plateau-19135.herokuapp.com/api/todos'
 
   // userInfo: object = {
   //   userToken : window.sessionStorage.getItem('token'),
@@ -48,8 +49,16 @@ export class TodosService {
     let userId = window.sessionStorage.getItem('userId');
     return this.http.put(`${this.userUrl}/${userId}/todos/${todo.id}?access_token=${token}`, todo)
   }
+
+  patchUserTodo(todo) {
+    let token = window.sessionStorage.getItem('token');
+    let userId = window.sessionStorage.getItem('userId');
+    return this.http.patch(`${this.todosUrl}/${todo.todoId}?access_token=${token}`, todo)
+
+  }
   
-  //http://localhost:3000/api/appUsers/5cbfbd4400d968760a7b4da9/todos/5cc3d78fb5772184a1388473?access_token=iXdbFlZlXYH5shcR1Zc8EYElvYIEnJPB5vJA3kXV7FcoSR16y04D7XkEmYMr0fw8
+  // http://localhost:3000/api/todos/5cfedf9795539b00174e68c5?access_token=vlp92vww2mFoyLZd0E6KR8ZBkL3BJUDKgZnLq1wcDCSyTwX2sGkJZWS3SRH8s1Pz
+
 
 
 
