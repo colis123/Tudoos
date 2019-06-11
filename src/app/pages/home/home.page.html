@@ -29,34 +29,37 @@
 </ion-content>
 
 <ion-content *ngIf='todosLength > 0' padding>
-  <div class="grid">
-  
 
-    <ion-item-sliding *ngFor="let todo of todos">
-      <ion-item lines="none">
+  <ion-list *ngFor="let todo of todos">
+      <ion-item-sliding #slidingItem>
+        <ion-item *ngIf="todo.checked; else notChecked">
+          <ion-label>{{todo.title}}</ion-label>
+          <ion-label><span class="date">{{todo.date}}</span></ion-label>
+          <ion-note slot="end"><ion-icon color="success" name="checkmark"></ion-icon></ion-note>
+        </ion-item>
 
-        <ion-checkbox slot="start"
-        [(ngModel)]="todo.checked" (click)="updateTodo(todo)"></ion-checkbox>
+        <ng-template #notChecked>
+          <ion-item>
+            <ion-label>{{todo.title}}</ion-label>
+            <ion-label><span class="date">{{todo.date}}</span></ion-label>
+             <ion-note slot="end"><ion-icon color="primary" name="podium"></ion-icon></ion-note>
+          </ion-item>
+        </ng-template>
 
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title class="upperCase">{{todo.title}}</ion-card-title>
-          </ion-card-header>
-
-          <ion-card-content>
-            {{todo.message}}
-          </ion-card-content>   
-        </ion-card>
-        
-      </ion-item>
         <ion-item-options side="end">
-          <ion-item-option (click)="deleteTodo(todo.id)" color="danger">
-            <ion-icon size="large" name="close"></ion-icon>
-          </ion-item-option>
-        </ion-item-options>
-    </ion-item-sliding>
-    </div>
+          <ion-item-option color="primary-contrast"><ion-checkbox [(ngModel)]="todo.checked" (click)="updateTodo(todo, slidingItem)"></ion-checkbox></ion-item-option>
 
+          <ion-item-option color="primary" (click)="editTodoModal(todo)"><ion-icon name="clipboard"></ion-icon></ion-item-option>
+
+          <ion-item-option color="danger" (click)="deleteTodo(todo.id)"><ion-icon name="trash"></ion-icon></ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+      <ion-card>
+        <ion-card-content>
+            {{todo.message}}
+        </ion-card-content>
+      </ion-card>
+  </ion-list>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="addTodo()">

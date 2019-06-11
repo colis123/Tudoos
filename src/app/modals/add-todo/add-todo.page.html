@@ -11,7 +11,7 @@
 
   <ion-item>
     <ion-label position="floating">Date</ion-label>
-    <ion-datetime [(ngModel)]="date" display-format="MMM DD, YYYY"></ion-datetime>
+    <ion-datetime [(ngModel)]="date" display-format="DD MM, YYYY"></ion-datetime>
   </ion-item>
   <ion-item>
     <ion-label position="floating">Title</ion-label>
@@ -24,4 +24,5 @@
   <div margin >
     <ion-button *ngIf="title && message && date" expand="full" (click)="addTodo()">Add Todo</ion-button>
   </div>
+  
 </ion-content>

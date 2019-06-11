@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'register', loadChildren: './pages/register/register.module#RegisterPageModule' },
   { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' },
   { path: 'add-todo', loadChildren: './modals/add-todo/add-todo.module#AddTodoPageModule' },
+  { path: 'edit-todo', loadChildren: './modals/edit-todo/edit-todo.module#EditTodoPageModule' },
 ];
 
 @NgModule({
