@@ -31,7 +31,7 @@
 <ion-content *ngIf='todosLength > 0' padding>
 
   <ion-list *ngFor="let todo of todos">
-      <ion-item-sliding>
+      <ion-item-sliding #slidingItem>
         <ion-item *ngIf="todo.checked; else notChecked">
           <ion-label>{{todo.title}}</ion-label>
           <ion-label><span class="date">{{todo.date}}</span></ion-label>
@@ -47,7 +47,7 @@
         </ng-template>
 
         <ion-item-options side="end">
-          <ion-item-option color="primary-contrast"><ion-checkbox [(ngModel)]="todo.checked" (click)="updateTodo(todo)"></ion-checkbox></ion-item-option>
+          <ion-item-option color="primary-contrast"><ion-checkbox [(ngModel)]="todo.checked" (click)="updateTodo(todo, slidingItem)"></ion-checkbox></ion-item-option>
 
           <ion-item-option color="primary" (click)="editTodoModal(todo)"><ion-icon name="clipboard"></ion-icon></ion-item-option>
 
