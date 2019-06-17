@@ -14,14 +14,16 @@ import { IonicStorageModule } from '@ionic/storage';
 import { TodosService } from './services/todos.service';
 
 import { AddTodoPage } from './modals/add-todo/add-todo.page';
-import { EditTodoPage } from './modals/edit-todo/edit-todo.page'
+import { EditTodoPage } from './modals/edit-todo/edit-todo.page';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment'
 
 
 @NgModule({
   declarations: [AppComponent, AddTodoPage, EditTodoPage],
   entryComponents: [AddTodoPage, EditTodoPage],
   imports: [
-  HttpClientModule, FormsModule, BrowserModule, IonicStorageModule.forRoot(), IonicModule.forRoot(), AppRoutingModule],
+  HttpClientModule, FormsModule, BrowserModule, IonicStorageModule.forRoot(), IonicModule.forRoot(), AppRoutingModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
   providers: [
     TodosService,
     StatusBar,
